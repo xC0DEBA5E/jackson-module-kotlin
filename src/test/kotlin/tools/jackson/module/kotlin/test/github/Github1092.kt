@@ -1,22 +1,30 @@
-package tools.jackson.module.kotlin.test
+package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
-import tools.jackson.databind.json.JsonMapper.builder
+import tools.jackson.databind.json.JsonMapper
 import tools.jackson.module.kotlin.kotlinModule
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
-
-val testJsonMapper = builder().addModule(kotlinModule()).build()
-
 @Execution(ExecutionMode.CONCURRENT)
-class JsonMapperThreadsafetyTest {
+class GitHub1092Test {
+
+    companion object {
+        private lateinit var testJsonMapper: JsonMapper
+
+        @JvmStatic
+        @BeforeAll
+        fun setup() {
+            testJsonMapper = JsonMapper.builder().addModule(kotlinModule()).build()
+        }
+    }
 
     private val roomsString = """{
             "rooms": [
