@@ -13,6 +13,9 @@ import tools.jackson.module.kotlin.kotlinModule
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
+/*
+ * Execute with: mvnw test -Dtest=tools.jackson.module.kotlin.test.github.GitHub1092Test -f pom.xml
+ */
 @Execution(ExecutionMode.CONCURRENT)
 class GitHub1092Test {
 
